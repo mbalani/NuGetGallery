@@ -62,17 +62,17 @@ namespace NuGetGallery.FunctionalTests.Commandline
             await _clientSdkHelper.UploadNewPackage(id, version1);
 
             // Can push new version of an existing package as self
-            await _clientSdkHelper.UploadNewPackage(id, version2);
+            //await _clientSdkHelper.UploadNewPackage(id, version2);
 
             // Verify the existence of the two pushed packages.
             await _clientSdkHelper.VerifyPackageExistsInV2Async(id, version1);
-            await _clientSdkHelper.VerifyPackageExistsInV2Async(id, version2);
+            //await _clientSdkHelper.VerifyPackageExistsInV2Async(id, version2);
 
             // Can unlist versions of an existing package as self
-            await _clientSdkHelper.UnlistPackageAndVerify(id, version2);
+            //await _clientSdkHelper.UnlistPackageAndVerify(id, version2);
         }
 
-        [Fact]
+        /*[Fact]
         [Description("Tests upload and unlist scenarios as an organization admin")]
         [Priority(0)]
         [Category("P0Tests")]
@@ -119,7 +119,7 @@ namespace NuGetGallery.FunctionalTests.Commandline
 
             // Can unlist versions of an existing package as organization
             await _clientSdkHelper.UnlistPackageAndVerify(id, version, apiKey);
-        }
+        }*/
 
         [Fact]
         [Description("Uses scoped API keys to push and unlist packages using Nuget.exe")]
