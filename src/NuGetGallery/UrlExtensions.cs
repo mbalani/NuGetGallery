@@ -790,15 +790,25 @@ namespace NuGetGallery
 
         public static string AcceptOrganizationMembershipRequest(this UrlHelper url, MembershipRequest request, bool relativeUrl = true)
         {
-            return url.HandleOrganizationMembershipRequest("ConfirmMemberRequest", request, relativeUrl);
+            return url.AcceptOrganizationMembershipRequest(request.Organization.Username, request.ConfirmationToken, relativeUrl);
         }
 
         public static string RejectOrganizationMembershipRequest(this UrlHelper url, MembershipRequest request, bool relativeUrl = true)
         {
-            return url.HandleOrganizationMembershipRequest("RejectMemberRequest", request, relativeUrl);
+            return url.RejectOrganizationMembershipRequest(request.Organization.Username, request.ConfirmationToken, relativeUrl);
         }
 
-        private static string HandleOrganizationMembershipRequest(this UrlHelper url,  string routeName, MembershipRequest request, bool relativeUrl = true)
+        public static string AcceptOrganizationMembershipRequest(this UrlHelper url, string organizationUsername, string confirmationToken, bool relativeUrl = true)
+        {
+            return url.HandleOrganizationMembershipRequest("ConfirmMemberRequest", organizationUsername, confirmationToken, relativeUrl);
+        }
+
+        public static string RejectOrganizationMembershipRequest(this UrlHelper url, string organizationUsername, string confirmationToken, bool relativeUrl = true)
+        {
+            return url.HandleOrganizationMembershipRequest("RejectMemberRequest", organizationUsername, confirmationToken, relativeUrl);
+        }
+
+        private static string HandleOrganizationMembershipRequest(this UrlHelper url, string routeName, string organizationUsername, string confirmationToken, bool relativeUrl = true)
         {
             return GetActionLink(url,
                 routeName,
@@ -806,8 +816,8 @@ namespace NuGetGallery
                 relativeUrl,
                 routeValues: new RouteValueDictionary
                 {
-                    { "accountName", request.Organization.Username },
-                    { "confirmationToken", request.ConfirmationToken }
+                    { "accountName", organizationUsername },
+                    { "confirmationToken", confirmationToken }
                 });
         }
 
