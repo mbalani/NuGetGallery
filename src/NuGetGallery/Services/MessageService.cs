@@ -723,10 +723,10 @@ The {Config.GalleryOwner.DisplayName} Team");
             {
                 return;
             }
+            
+            string subject = $"[{Config.GalleryOwner.DisplayName}] The user '{adminUser.Username}' has accepted your request and your account, '{accountToTransform.Username}' has now been transformed into an organization.";
 
-            string subject = $"[{Config.GalleryOwner.DisplayName}] The user '{adminUser.Username}' has accepted your request for them to be the admin of your transformed account.";
-
-            string body = string.Format(CultureInfo.CurrentCulture, $@"The user '{adminUser.Username}' has accepted your request for them to be the admin of your transformed account.
+            string body = string.Format(CultureInfo.CurrentCulture, $@"The user '{adminUser.Username}' has accepted your request and your account, '{accountToTransform.Username}' has now been transformed into an organization.
 
 Thanks,
 The {Config.GalleryOwner.DisplayName} Team");
@@ -794,7 +794,7 @@ The {Config.GalleryOwner.DisplayName} Team");
                 SendMessage(mailMessage);
             }
         }
-
+        
         public void SendOrganizationMembershipRequest(Organization organization, User newUser, User adminUser, bool isAdmin, string profileUrl, string confirmationUrl, string rejectionUrl)
         {
             if (!newUser.EmailAllowed)
@@ -940,7 +940,7 @@ The {Config.GalleryOwner.DisplayName} Team");
                 SendMessage(mailMessage);
             }
         }
-
+        
         protected override void SendMessage(MailMessage mailMessage, bool copySender)
         {
             try

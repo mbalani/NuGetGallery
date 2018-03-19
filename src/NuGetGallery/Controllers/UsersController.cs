@@ -134,7 +134,8 @@ namespace NuGetGallery
                 ModelState.AddModelError(string.Empty, errorReason);
                 return View(transformViewModel);
             }
-
+            
+            // Get the user from the previous organization migration request (if there was one) so we can notify them that their request has been cancelled.
             var existingTransformRequestUser = accountToTransform.OrganizationMigrationRequest?.AdminUser;
 
             await UserService.RequestTransformToOrganizationAccount(accountToTransform, adminUser);
@@ -156,6 +157,7 @@ namespace NuGetGallery
                 Strings.TransformAccount_SignInToConfirm, adminUser.Username, accountToTransform.Username);
             return Redirect(Url.LogOn(returnUrl));
         }
+
 
         [HttpGet]
         [UIAuthorize(allowDiscontinuedLogins: true)]

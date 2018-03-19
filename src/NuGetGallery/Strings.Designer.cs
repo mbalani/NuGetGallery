@@ -1274,7 +1274,7 @@ namespace NuGetGallery {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &gt;&gt;&gt;&gt;&gt;&gt;&gt; emails for transforming into org and changing org members.
+        ///   Looks up a localized string similar to There is no request for user &apos;{0}&apos; for join this organization with that token..
         /// </summary>
         public static string RejectMembershipRequest_NotFound {
             get {
