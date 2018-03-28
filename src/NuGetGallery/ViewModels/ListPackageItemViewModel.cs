@@ -62,7 +62,7 @@ namespace NuGetGallery
             }
         }
 
-        public bool HasSingleOwner
+        public bool HasSingleUserOwner
         {
             get
             {
@@ -85,6 +85,8 @@ namespace NuGetGallery
                 return userAccountOwners.Any();
             }
         }
+
+        public bool HasSingleOrganizationOwner => Owners.Distinct().Count() < 2;
 
         public bool CanDisplayPrivateMetadata { get; set; }
         public string PushedBy { get; set; }
