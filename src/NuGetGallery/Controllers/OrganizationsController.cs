@@ -112,6 +112,11 @@ namespace NuGetGallery
                 return Json((int)HttpStatusCode.Forbidden, Strings.Unauthorized);
             }
 
+            if (!account.Confirmed)
+            {
+                return Json((int)HttpStatusCode.BadRequest, Strings.Member_OrganizationUnconfirmed);
+            }
+
             try
             {
                 var request = await UserService.AddMembershipRequestAsync(account, memberName, isAdmin);
@@ -232,6 +237,11 @@ namespace NuGetGallery
                 return Json((int)HttpStatusCode.Forbidden, Strings.Unauthorized);
             }
 
+            if (!account.Confirmed)
+            {
+                return Json((int)HttpStatusCode.BadRequest, Strings.Member_OrganizationUnconfirmed);
+            }
+
             try
             {
                 var membership = await UserService.UpdateMemberAsync(account, memberName, isAdmin);
@@ -260,6 +270,11 @@ namespace NuGetGallery
                     != PermissionsCheckResult.Allowed))
             {
                 return Json((int)HttpStatusCode.Forbidden, Strings.Unauthorized);
+            }
+
+            if (!account.Confirmed)
+            {
+                return Json((int)HttpStatusCode.BadRequest, Strings.Member_OrganizationUnconfirmed);
             }
 
             try
